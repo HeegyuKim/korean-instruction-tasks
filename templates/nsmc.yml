@@ -1,0 +1,24 @@
+dataset: huggingface/nsmc
+tasks:
+  - name: nsmc-binary-classification
+    builder: binary-classification
+    templates:
+      - id: 0
+        instruction: "리뷰를 읽고 사용자가 긍정적으로 평가했는지 대답하세요."
+        input: "리뷰: {document}\n대답: "
+      - id: 1
+        instruction: "댓글 작성자의 생각은 긍정적입니까?"
+        input: "댓글: {document}\n생각: "
+      - id: 2
+        instruction: "다음 리뷰는 긍정적인 리뷰입니까?"
+        input: "리뷰: {document}\n나의 대답은: "
+
+  - name: nsmc-multi-classification
+    builder: multi-classification
+    labelset:
+      - ["부정", "긍정"]
+      - ["싫어한다", "좋아한다"]
+    templates:
+      - id: 0
+        instruction: "리뷰를 읽고 사용자가 어떻게 평가했는지 {labels} 중에서 하나를 골라 대답하세요."
+        input: "리뷰: {document}\n대답: "
